@@ -771,6 +771,9 @@ function CharacterCreationProfession:addTrait(bad)
     if bad then
         list = self.listboxBadTrait;
     end
+    if bad == "favFood" then
+        list = self.listboxFavFood;
+    end
 	local selectedTrait = list.items[list.selected].text;
 	-- points left calcul
 	self.pointToSpend = self.pointToSpend - list.items[list.selected].item:getCost();
@@ -841,8 +844,12 @@ function CharacterCreationProfession:removeTrait()
         local newItem = {};
         if trait:getCost() > 0 then
     		newItem = self.listboxTrait:addItem(trait:getLabel(), trait);
-        else
+        end
+        if trait:getCost() < 0 then
             newItem = self.listboxBadTrait:addItem(trait:getLabel(), trait);
+        end
+        if trait:getCost() == 0 then
+            newItem = self.listboxFavFood:addItem(trait:getLabel(), trait);
         end
 		newItem.tooltip = trait:getDescription();
 		-- add traits excluded by the removed trait back to the available-traits lists
@@ -1056,6 +1063,18 @@ function CharacterCreationProfession:populateBadTraitList(list)
         if not trait:isFree() and trait:getCost() < 0 and ((trait:isRemoveInMP() and not isClient()) or not trait:isRemoveInMP()) then
             local newItem = list:addItem(trait:getLabel(), trait);
             newItem.tooltip = trait:getDescription();
+        end
+    end
+end
+
+
+function CharacterCreationProfession:populateFavFoodList(list)
+    local traitList = TraitFactory.getTraits();
+    for i = 0, traitList:size() - 1 do
+        local trait = traitList:get(i);
+        print(trait);
+        if not trait:isFree() and trait:getCost() == 0 then
+            list:addItem(trait:getLabel(), trait);
         end
     end
 end
