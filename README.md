@@ -7,4 +7,5 @@ This favorite food will override the stats of that food to give higher positive 
 Icons for the traits are used from the base game and are owned by Indie Stone.
 
 --
+
 Thanks to The Indie Stone for creating Project Zomboid https://projectzomboid.com/), which made this possible. This is an unofficial fan production for non-commercial purposes made under the [Indie Stone Terms](https://projectzomboid.com/blog/support/terms-conditions/)
