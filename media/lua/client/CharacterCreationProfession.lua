@@ -301,10 +301,10 @@ function CharacterCreationProfession:create()
     self.listboxFavFood:setAnchorBottom(true);
     self.listboxFavFood.itemheight = 30;
     self.listboxFavFood.selected = -1;
-    -- self:populateBadTraitList(self.listboxFavFood);
+    self:populateFavFoodList(self.listboxFavFood);
     self.listboxFavFood.doDrawItem = CharacterCreationProfession.drawTraitMap;
-    self.listboxFavFood:setOnMouseDownFunction(self, CharacterCreationProfession.onSelectBadTrait);
-    self.listboxFavFood:setOnMouseDoubleClick(self, CharacterCreationProfession.onDblClickBadTrait);
+    self.listboxFavFood:setOnMouseDownFunction(self, CharacterCreationProfession.onSelectFavFood);
+    self.listboxFavFood:setOnMouseDoubleClick(self, CharacterCreationProfession.onDblClickFavFood);
     self.listboxFavFood.resetSelectionOnChangeFocus = true;
     self.listboxFavFood.drawBorder = true
     self.listboxFavFood.fontHgt = self.fontHgt
@@ -350,17 +350,17 @@ function CharacterCreationProfession:create()
     self.mainPanel:addChild(self.addBadTraitBtn);
 
     -- button to choose favorite food
-    self.addFavoriteFoodBtn = ISButton:new(self.listboxFavFood:getX() + self.listboxFavFood:getWidth() - 50, (self.listboxFavFood:getY() + self.listboxFavFood:getHeight()) + self.traitButtonPad, 50, self.traitButtonHgt, "Add food >", self, self.onOptionMouseDown);
-    self.addFavoriteFoodBtn.internal = "ADDBADTRAIT";
-    self.addFavoriteFoodBtn:initialise();
-    self.addFavoriteFoodBtn:instantiate();
-    self.addFavoriteFoodBtn:setAnchorLeft(true);
-    self.addFavoriteFoodBtn:setAnchorRight(false);
-    self.addFavoriteFoodBtn:setAnchorTop(false);
-    self.addFavoriteFoodBtn:setAnchorBottom(true);
-    self.addFavoriteFoodBtn:setEnable(false);
+    self.addFavFoodBtn = ISButton:new(self.listboxFavFood:getX() + self.listboxFavFood:getWidth() - 50, (self.listboxFavFood:getY() + self.listboxFavFood:getHeight()) + self.traitButtonPad, 50, self.traitButtonHgt, "Add food >", self, self.onOptionMouseDown);
+    self.addFavFoodBtn.internal = "ADDFAVFOOD";
+    self.addFavFoodBtn:initialise();
+    self.addFavFoodBtn:instantiate();
+    self.addFavFoodBtn:setAnchorLeft(true);
+    self.addFavFoodBtn:setAnchorRight(false);
+    self.addFavFoodBtn:setAnchorTop(false);
+    self.addFavFoodBtn:setAnchorBottom(true);
+    self.addFavFoodBtn:setEnable(false);
     --	self.addTraitBtn.borderColor = { r = 1, g = 1, b = 1, a = 0.1 };
-    self.mainPanel:addChild(self.addFavoriteFoodBtn);
+    self.mainPanel:addChild(self.addFavFoodBtn);
 
     -- the profession list choice
 	self.listboxProf = CharacterCreationProfessionListBox:new(16, self.topOfLists, self.tableWidth, self.bottomOfLists - self.topOfLists);
@@ -502,6 +502,10 @@ function CharacterCreationProfession:onSelectBadTrait(item)
     self.addBadTraitBtn:setEnable(true);
 end
 
+function CharacterCreationProfession:onSelectFavFood(item)
+    self.addFavFoodBtn:setEnable(true);
+end
+
 function CharacterCreationProfession:onDblClickSelectedTrait(item)
 	self:removeTrait();
     self:checkXPBoost();
@@ -510,6 +514,10 @@ end
 function CharacterCreationProfession:onDblClickBadTrait(item)
 	self:addTrait(true);
     self:checkXPBoost();
+end
+
+function CharacterCreationProfession:onDblClickFavFood(item)
+    self:addTrait("favFood");
 end
 
 function CharacterCreationProfession:onDblClickTrait(item)
@@ -742,6 +750,11 @@ function CharacterCreationProfession:onOptionMouseDown(button, x, y)
             self:checkXPBoost();
         end
     end
+    if button.internal == "ADDFAVFOOD" then
+        if self.listboxFavFood.selected > 0 then
+            self:addTrait("favFood");
+        end
+    end
 	if button.internal == "REMOVETRAIT" then
 		if self.listboxTraitSelected.selected > 0 then
 			self:removeTrait();
@@ -771,10 +784,12 @@ function CharacterCreationProfession:addTrait(bad)
 	-- reset cursor
 	self.listboxTraitSelected.selected = -1;
     self.listboxBadTrait.selected = -1;
+    self.listboxFavFood.selected = -1;
     self.listboxTrait.selected = -1;
 	self.removeTraitBtn:setEnable(false);
 	self.addTraitBtn:setEnable(false);
     self.addBadTraitBtn:setEnable(false);
+    self.addFavFoodBtn:setEnable(false);
     CharacterCreationMain.sort(self.listboxTraitSelected.items);
 end
 
@@ -836,11 +851,14 @@ function CharacterCreationProfession:removeTrait()
 		self.listboxTraitSelected.selected = -1;
 		self.listboxTrait.selected = -1;
         self.listboxBadTrait.selected = -1;
+        self.listboxFavFood.selected = -1;
 		self.removeTraitBtn:setEnable(false);
 		self.addTraitBtn:setEnable(false);
         self.addBadTraitBtn:setEnable(false);
+        self.addFavFoodBtn:setEnable(false);
         CharacterCreationMain.sort(self.listboxTrait.items);
         CharacterCreationMain.invertSort(self.listboxBadTrait.items);
+        CharacterCreationMain:sort(self.listboxFavFood.items);
 	end
 end
 
@@ -884,7 +902,7 @@ function CharacterCreationProfession:prerender()
     self.listboxXpBoost:setWidth(listWidth);
 	self.addBadTraitBtn:setX(self.listboxBadTrait:getRight() - self.addBadTraitBtn:getWidth());
     self.addTraitBtn:setX(self.listboxTrait:getRight() - self.addTraitBtn:getWidth());
-    self.addFavoriteFoodBtn:setX(self.listboxFavFood:getRight() - self.addFavoriteFoodBtn:getWidth());
+    self.addFavFoodBtn:setX(self.listboxFavFood:getRight() - self.addFavFoodBtn:getWidth());
     self.removeTraitBtn:setX(self.listboxTraitSelected:getRight() - self.removeTraitBtn:getWidth());
 
 	self.bottomOfLists = self.mainPanel:getHeight() - self.belowLists
@@ -907,7 +925,7 @@ function CharacterCreationProfession:prerender()
 
     self.listboxFavFood:setY(self.listboxTrait:getY() + self.smallFontHgt + (thirdListHeight * 2) + (traitButtonGap * 2))
 	self.listboxFavFood:setHeight(thirdListHeight)
-	self.addFavoriteFoodBtn:setY(self.listboxFavFood:getY() + thirdListHeight + self.traitButtonPad)
+	self.addFavFoodBtn:setY(self.listboxFavFood:getY() + thirdListHeight + self.traitButtonPad)
 
 	self.listboxXpBoost:setY(self.listboxTraitSelected:getY() + halfListHeight1 + traitButtonGap)
 	self.listboxXpBoost:setHeight(halfListHeight2)
