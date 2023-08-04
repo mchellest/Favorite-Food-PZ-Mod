@@ -204,12 +204,26 @@ end
 
 function CharacterCreationProfession:addTrait(bad)
     local list = self.listboxTrait;
+    local favFoodAlreadyExists = false;
     if bad then
         list = self.listboxBadTrait;
     end
     if bad == "favFood" then -- FF Mod
-        list = self.listboxFavFood;
+        local currentTraits = self.listboxTraitSelected.items;
+        -- Goal: Allow only one favorite food
+        if #currentTraits > 0 then
+            -- Loop through the current traits to see if any are "FavFood" traits
+            for i = 1, #currentTraits do
+                local trait = currentTraits[i].item;
+                if not trait:isFree() and trait:getCost() == 0 then
+                    favFoodAlreadyExists = true;
+                else
+                    list = self.listboxFavFood;
+                end
+            end
+        end
     end
+    if favFoodAlreadyExists then return end -- Do not add the trait
 	local selectedTrait = list.items[list.selected].text;
 	-- points left calcul
 	self.pointToSpend = self.pointToSpend - list.items[list.selected].item:getCost();
