@@ -204,14 +204,14 @@ end
 
 function CharacterCreationProfession:addTrait(bad)
     local list = self.listboxTrait;
-    local favFoodAlreadyExists = false;
+    local favFoodSelected = false;
     if bad then
         list = self.listboxBadTrait;
     end
     if bad == "favFood" then -- FF Mod
         list = self.listboxFavFood;
 
-        favFoodAlreadyExists = self:checkForFavFood(); -- Check to see if Fav Food trait has already been added
+        favFoodSelected = self:checkForFavFood(); -- Check to see if Fav Food trait has already been added
     end
     if favFoodAlreadyExists then return end -- Do not add the trait
 	local selectedTrait = list.items[list.selected].text;
@@ -233,12 +233,21 @@ function CharacterCreationProfession:addTrait(bad)
 	self.addTraitBtn:setEnable(false);
     self.addBadTraitBtn:setEnable(false);
     self.addFavFoodBtn:setEnable(false); -- FF Mod
+
+    if favFoodSelected ~= false then -- If not false, we were returned the existing Fav Food Trait
+        self:removeTrait(favFoodSelected); -- Remove; Essentially swap the traits
+    end
     CharacterCreationMain.sort(self.listboxTraitSelected.items);
 end
 
 -- Remove Trait
-function CharacterCreationProfession:removeTrait()
-    local trait = self.listboxTraitSelected.items[self.listboxTraitSelected.selected].item
+function CharacterCreationProfession:removeTrait(favFood)
+    local trait = nil;
+    if favFood ~= nil then
+        trait = favFood;
+    else
+        trait = self.listboxTraitSelected.items[self.listboxTraitSelected.selected].item;
+    end
 	if not trait:isFree() then
 		-- remove from the selected traits
 		self.listboxTraitSelected:removeItem(trait:getLabel());
@@ -331,27 +340,17 @@ function CharacterCreationProfession:populateFavFoodList(list)
 end
 
 function CharacterCreationProfession:checkForFavFood()
-    local favFoodAlreadyExists = false;
+    local favFoodSelected = false;
     local currentTraits = self.listboxTraitSelected.items;
     if #currentTraits > 0 then
         -- Loop through the current traits to see if any are "FavFood" traits
         for i = 1, #currentTraits do
             local trait = currentTraits[i].item;
             if not trait:isFree() and trait:getCost() == 0 then
-                favFoodAlreadyExists = true;
+                favFoodSelected = trait;
             end
         end
     end
 
-    return favFoodAlreadyExists;
+    return favFoodSelected;
 end
-
--- function CharacterCreationProfession:disableFavoriteFoodOptions(list)
---     for i = 0, list:size() - 1 do
---         local trait = list:get(i);
---         if not trait:isFree() and trait:getCost() == 0 then
---             local label = trait:getLabel();
---             trait:getLabel() = string.format("[COLOR:%d:%d:%d:%d]%s[ENDCOLOR]", r, g, b, a, label));
---         end
---     end
--- end
