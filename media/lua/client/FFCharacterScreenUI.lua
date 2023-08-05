@@ -209,19 +209,9 @@ function CharacterCreationProfession:addTrait(bad)
         list = self.listboxBadTrait;
     end
     if bad == "favFood" then -- FF Mod
-        local currentTraits = self.listboxTraitSelected.items;
-        -- Goal: Allow only one favorite food
-        if #currentTraits > 0 then
-            -- Loop through the current traits to see if any are "FavFood" traits
-            for i = 1, #currentTraits do
-                local trait = currentTraits[i].item;
-                if not trait:isFree() and trait:getCost() == 0 then
-                    favFoodAlreadyExists = true;
-                else
-                    list = self.listboxFavFood;
-                end
-            end
-        end
+        list = self.listboxFavFood;
+
+        favFoodAlreadyExists = self:checkForFavFood(); -- Check to see if Fav Food trait has already been added
     end
     if favFoodAlreadyExists then return end -- Do not add the trait
 	local selectedTrait = list.items[list.selected].text;
@@ -339,3 +329,29 @@ function CharacterCreationProfession:populateFavFoodList(list)
         end
     end
 end
+
+function CharacterCreationProfession:checkForFavFood()
+    local favFoodAlreadyExists = false;
+    local currentTraits = self.listboxTraitSelected.items;
+    if #currentTraits > 0 then
+        -- Loop through the current traits to see if any are "FavFood" traits
+        for i = 1, #currentTraits do
+            local trait = currentTraits[i].item;
+            if not trait:isFree() and trait:getCost() == 0 then
+                favFoodAlreadyExists = true;
+            end
+        end
+    end
+
+    return favFoodAlreadyExists;
+end
+
+-- function CharacterCreationProfession:disableFavoriteFoodOptions(list)
+--     for i = 0, list:size() - 1 do
+--         local trait = list:get(i);
+--         if not trait:isFree() and trait:getCost() == 0 then
+--             local label = trait:getLabel();
+--             trait:getLabel() = string.format("[COLOR:%d:%d:%d:%d]%s[ENDCOLOR]", r, g, b, a, label));
+--         end
+--     end
+-- end
