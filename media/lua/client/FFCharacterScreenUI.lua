@@ -76,7 +76,7 @@ function CharacterCreationProfession:create()
     self.mainPanel:addChild(self.listboxFavFood);
 
     -- Create Button to choose Favorite Food
-    self.addFavFoodBtn = ISButton:new(self.listboxFavFood:getX() + self.listboxFavFood:getWidth() - 50, (self.listboxFavFood:getY() + self.listboxFavFood:getHeight()) + self.traitButtonPad, 50, self.traitButtonHgt, "Add food >", self, self.onOptionMouseDown);
+    self.addFavFoodBtn = ISButton:new(self.listboxFavFood:getX() + self.listboxFavFood:getWidth() - 50, (self.listboxFavFood:getY() + self.listboxFavFood:getHeight()) + self.traitButtonPad, 50, self.traitButtonHgt, "Add Fav Food >", self, self.onOptionMouseDown);
     self.addFavFoodBtn.internal = "ADDFAVFOOD";
     self.addFavFoodBtn:initialise();
     self.addFavFoodBtn:instantiate();
