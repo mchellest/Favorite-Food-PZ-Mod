@@ -213,7 +213,6 @@ function CharacterCreationProfession:addTrait(bad)
 
         favFoodSelected = self:checkForFavFood(); -- Check to see if Fav Food trait has already been added
     end
-    if favFoodAlreadyExists then return end -- Do not add the trait
 	local selectedTrait = list.items[list.selected].text;
 	-- points left calcul
 	self.pointToSpend = self.pointToSpend - list.items[list.selected].item:getCost();
