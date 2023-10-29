@@ -264,7 +264,7 @@ function CharacterCreationProfession:removeTrait(favFood)
         if trait:getCost() == 0 then
             newItem = self.listboxFavFood:addItem(trait:getLabel(), trait); -- FF Mod
         end
-		newItem.tooltip = trait:getDescription();
+        newItem.tooltip = trait:getDescription();
 		-- add traits excluded by the removed trait back to the available-traits lists
 		self:mutualyExclusive(trait, true);
 		-- reset cursor
