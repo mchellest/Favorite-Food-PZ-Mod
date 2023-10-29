@@ -81,7 +81,5 @@ function ISCharacterScreen:render()
 	local textWid3 = getTextManager():MeasureStringX(UIFont.Small, getText("IGUI_char_Survived_For"))
 	local x = 20 + math.max(textWid1, math.max(textWid2, textWid3))
 
-    self:drawTextRight("Test", self.xOffset, x, 1,1,1,1, UIFont.Small);
-
 
 end -- Render
