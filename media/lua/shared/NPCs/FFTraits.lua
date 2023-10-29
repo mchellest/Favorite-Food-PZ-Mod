@@ -6,6 +6,8 @@ FFTraitsDetails.DoTraits = function ()
     local favFoodChicken = TraitFactory.addTrait("FavFoodChicken", "Chicken", 0, "This increases positive buffs your character gets from eating Chicken", false);
     local favFoodBacon = TraitFactory.addTrait("FavFoodBacon", "Bacon", 0, "This increases positive buffs your character gets from eating Bacon", false);
 
+    -- TraitFactory.sortList();
+
 end
 
 Events.OnGameBoot.Add(FFTraitsDetails.DoTraits);

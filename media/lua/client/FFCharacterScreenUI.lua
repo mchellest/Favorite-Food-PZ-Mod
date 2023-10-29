@@ -189,6 +189,7 @@ function CharacterCreationProfession:onOptionMouseDown(button, x, y)
     if button.internal == "ADDFAVFOOD" then
         if self.listboxFavFood.selected > 0 then
             self:addTrait("favFood");
+            self:toggleStateFavFoodBtn(button.enable)
         end
     end
 	if button.internal == "REMOVETRAIT" then
