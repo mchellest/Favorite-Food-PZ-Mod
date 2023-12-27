@@ -41,9 +41,12 @@ function ISCharacterScreen:render()
     local favFoodTraits = {};
     -- Redraw traits to remove the Favorite Food from other traits
     if #self.traits > 0 then
+        self:drawTextRight(getText("IGUI_char_Traits"), self.xOffset, z, 1,1,1,1, UIFont.Small);
+		local x = self.xOffset + 10;
+		local y = z + (math.max(FONT_HGT_SMALL, 18) - 18) / 2 + 2
         for i, v in ipairs(self.traits) do
             local textureName = v:getTexture():getName()
-            local isFavoriteFood = string.find(textureName, "favFood");
+            local isFavoriteFood = string.find(textureName, "favfood");
             if isFavoriteFood == nil then
                 v:setY(y);
                 v:setX(x);
@@ -73,13 +76,12 @@ function ISCharacterScreen:render()
         end
     end
 
-	z = self.literatureButton:getBottom();
-	z = math.max(z + 16, traitBottom);
-	z = math.max(z, self.avatarY + self.avatarHeight + 25)
-	local textWid1 = getTextManager():MeasureStringX(UIFont.Small, getText("IGUI_char_Favourite_Weapon"))
-	local textWid2 = getTextManager():MeasureStringX(UIFont.Small, getText("IGUI_char_Zombies_Killed"))
-	local textWid3 = getTextManager():MeasureStringX(UIFont.Small, getText("IGUI_char_Survived_For"))
-	local x = 20 + math.max(textWid1, math.max(textWid2, textWid3))
-
+	-- z = self.literatureButton:getBottom();
+	-- z = math.max(z + 16, traitBottom);
+	-- z = math.max(z, self.avatarY + self.avatarHeight + 25)
+	-- local textWid1 = getTextManager():MeasureStringX(UIFont.Small, getText("IGUI_char_Favourite_Weapon"))
+	-- local textWid2 = getTextManager():MeasureStringX(UIFont.Small, getText("IGUI_char_Zombies_Killed"))
+	-- local textWid3 = getTextManager():MeasureStringX(UIFont.Small, getText("IGUI_char_Survived_For"))
+	-- local x = 20 + math.max(textWid1, math.max(textWid2, textWid3))
 
 end -- Render
