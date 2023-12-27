@@ -1,0 +1,26 @@
+module Base
+{
+	item Banana
+	{
+		DisplayName = Banana,
+		DisplayCategory = Food,
+		Type = Food,
+		Weight = 0.2,
+		Icon = Banana,
+		EvolvedRecipe = Bread:16;Cake:16;FruitSalad:8;Pancakes:8;Waffles:8;Muffin:8;ConeIcecream:4;PieSweet:16;Oatmeal:4;Sandwich:8;Sandwich Baguette:8,
+		FoodType = Fruits,
+		DaysFresh = 5,
+		DaysTotallyRotten = 7,
+		HungerChange = -20,
+		ThirstChange = -5,
+		UnhappyChange = -15,
+		StressChange = -10,
+		Calories = 105,
+		Carbohydrates = 26.95,
+		Lipids = 0.39,
+		Proteins = 1.29,
+		CustomEatSound = EatingMushy,
+		StaticModel = CylinderFood_Yellow,
+		WorldStaticModel = Banana_Ground,
+	}
+}

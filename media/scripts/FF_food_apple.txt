@@ -1,0 +1,26 @@
+module Base
+{
+	item Apple
+		{
+			DisplayName = Apple,
+			DisplayCategory = Food,
+			Type = Food,
+			Weight = 0.2,
+			Icon = Apple,
+			EvolvedRecipe = Cake:16;FruitSalad:8;Pancakes:8;Waffles:8;Muffin:8;PieSweet:16;Oatmeal:4;Salad:8,
+			FoodType = Fruits,
+			DaysFresh = 5,
+			DaysTotallyRotten = 8,
+			HungerChange = -20,
+			ThirstChange = -7,
+			UnhappyChange = -15,
+			StressChange = -10,
+			Calories = 95,
+			Carbohydrates = 25.13,
+			Lipids = 0.31,
+			Proteins = 0.47,
+			CustomEatSound = EatingFruit,
+			StaticModel = RoundFood_Red,
+			WorldStaticModel = Apple_Ground,
+		}
+}

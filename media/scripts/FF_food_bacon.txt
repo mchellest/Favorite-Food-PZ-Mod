@@ -1,0 +1,30 @@
+module Base
+{
+    item Bacon
+	{
+		DisplayName = Chicken,
+		DisplayCategory = Food,
+		Type = Food,
+		Weight = 0.3,
+		Icon = Chicken,
+		BadInMicrowave = true,
+		DangerousUncooked = TRUE,
+		EvolvedRecipe = Pizza:12;Soup:18;Stew:18;Pie:12;Stir fry Griddle Pan:18;Stir fry:18;Sandwich:6|Cooked;Sandwich Baguette:6|Cooked;Burger:12|Cooked;Salad:6|Cooked;Roasted Vegetables:18;RicePot:18;RicePan:18;PastaPot:18;PastaPan:18;Taco:6|Cooked;Burrito:12|Cooked,
+		FoodType = Poultry,
+		GoodHot = true,
+		IsCookable = TRUE,
+		MinutesToCook = 30,
+		MinutesToBurn = 60,
+		DaysFresh = 2,
+		DaysTotallyRotten = 4,
+		HungerChange = -55,
+        UnhappyChange = -20,
+        StressChange = -25,
+		Calories = 150,
+		Carbohydrates = 0,
+		Lipids = 9,
+		Proteins = 18,
+		StaticModel = FriedChicken,
+		WorldStaticModel = Chicken,
+	}
+}

@@ -1,0 +1,25 @@
+module Base
+{
+	item Avocado
+	{
+		DisplayName = Avocado,
+		DisplayCategory = Food,
+		Type = Food,
+		Weight = 0.3,
+		Icon = Avocado,
+		EvolvedRecipe = Omelette:8;Soup:16;Stew:16;Pie:16;Stir fry Griddle Pan:16;Stir fry:16;Sandwich:8;Sandwich Baguette:8;Salad:16;Roasted Vegetables:16;RicePot:16;RicePan:16;PastaPot:16;PastaPan:16;Taco:8;Burrito:8;Toast:8,
+		FoodType = Vegetables,
+		DaysFresh = 6,
+		DaysTotallyRotten = 14,
+		HungerChange = -20,
+		ThirstChange = -7,
+		UnhappyChange = -15,
+		StressChange = -10,
+		Calories = 227,
+		Carbohydrates = 11.75,
+		Lipids = 20.96,
+		Proteins = 2.67,
+		StaticModel = RoundFood_Green,
+		WorldStaticModel = Avocado_Ground,
+	}
+}
