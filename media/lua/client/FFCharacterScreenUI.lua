@@ -278,7 +278,8 @@ function CharacterCreationProfession:removeTrait(favFood)
         self.addFavFoodBtn:setEnable(false); -- FF Mod
         CharacterCreationMain.sort(self.listboxTrait.items);
         CharacterCreationMain.invertSort(self.listboxBadTrait.items);
-        CharacterCreationMain:sort(self.listboxFavFood.items); -- FF Mod
+        -- Alphabetically sort listboxFavFood items
+        table.sort(self.listboxFavFood.items, function (item1, item2) return item1.text < item2.text end);
 	end
 end
 
