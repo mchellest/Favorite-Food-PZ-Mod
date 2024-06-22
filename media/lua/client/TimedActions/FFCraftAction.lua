@@ -5,17 +5,17 @@ ISCraftAction = ISBaseTimedAction:derive("ISCraftAction");
 local PZ_Craft_Perform = ISCraftAction.perform;
 
 function ISCraftAction:perform()
-  -- Call original function
-  PZ_Craft_Perform(self);
-  
+    -- Call original function
+    -- PZ_Craft_Perform(self);
+    
 	local resultItemCreated = RecipeManager.PerformMakeItem(self.recipe, self.item, self.character, self.containers);
-  if resultItemCreated and instanceof(resultItemCreated, "Food") and instanceof(self.item, "Food") then
+    if resultItemCreated and instanceof(resultItemCreated, "Food") and instanceof(self.item, "Food") then
 		-- TODO: this could be improved by checking/averaging all the items involved
 		resultItemCreated:setHeat(self.item:getHeat());
 		resultItemCreated:setFreezingTime(self.item:getFreezingTime());
 		resultItemCreated:setFrozen(self.item:isFrozen());
 	end
-  if resultItemCreated and self.recipe:getResult():getCount() > 1 then
+    if resultItemCreated and self.recipe:getResult():getCount() > 1 then
 		-- FIXME: this does not call the recipe's OnCreate lua function
 		local itemsAdded = self.container:AddItems(resultItemCreated:getFullType(), self.recipe:getResult():getCount());
 		-- now we modify the variables of the item created, for example if you create a nailed baseball bat, it'll have the condition of the used baseball bat
@@ -51,5 +51,5 @@ function ISCraftAction:perform()
 				newItem:setUnhappyChange(resultItemCreated:getUnhappyChangeUnmodified());
 			end
 		end
-  end
+    end
 end
