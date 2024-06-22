@@ -1,32 +1,25 @@
-require "FFList";
+-- Future Idea: Include Mod options that include Fruit, Veggies with regular Food for Favorite Foods Options
+FFFruit = { "Apple", "Banana", "Berry", "Cherry", "Grapefruit", "Grapes", "Lemon", "Lime", "Mango", "Orange", "Peach", "Pear", "Pineapple", "Strawberries", "Watermelon" };
+FFVeggies = { "Avocado", "Bell Pepper", "Black Beans", "Broccoli", "Cabbage", "Carrots", "Corn", "Eggplant", "Leek", "Lettuce", "Mixed Vegetables", "Mushroom", "Onion", "Peas", "Potato", "Radish", "Tomato", "Zucchini" };
+FFPerishableFood = { "Bacon", "Bagel", "Baguette", "Baloney", "Bass", "Biscuit", "Black Forrest Cake", "Bread", "Burger", "Burrito", "Carrot Cake", "Catfish", "Cheese", "Cheese Cake Slice", "Chicken", "Chocolate", "Corndog", "Croissant", "Cupcake", "Doughnut", "Egg", "Fries", "Granola Bar", "Ground Beef", "Guacamole", "Ham", "Hot Dog", "Ice Cream", "Jalapeno", "Lobster", "Maki", "Mayonnaise",  "Meat Patty", "Milk", "Mutton Chop", "Noodles", "Onigiri", "Pancakes", "Peanut Butter Sandwich", "Pepperoni", "Pie", "Pizza", "Poached Egg", "Poppy Bagel", "Pork Chop", "Potato Pancakes", "Processed Cheese", "Refied Beans", "Salami", "Salmon", "Sausage", "Scrambled Eggs", "Shrimp", "Spring Roll", "Squid", "Steak", "Sunfish", "Taco", "Toast", "Tortilla", "Waffles", "Yogurt" };
 
 FFTraitsDetails = {};
 -- addTrait(string: Name, string: Name, int: Cost, string: Tooltip text, boolean: isFree)
 -- Traits that have isFree as true will not show the tooltip text on hover
 -- Traits that have isFree as false will be sorted into Good/Bad traits and show tooltip on hover
 FFTraitsDetails.DoTraits = function ()
-    -- Set up code to dynamically create Favorite Food traits based on lists from FFList in the future
-    -- Currently not working
-    -- if #FFList > 0 then
-    --     TraitFactory.addTrait("FavFoodChicken", "FFListTest", 0, "This increases positive buffs your character gets from eating Chicken", false);
 
-    --     for _, listItem in ipairs(FFList) do
-    --         TraitFactory.addTrait("FavFoodChicken", "Test", 0, "This increases positive buffs your character gets from eating Chicken", false);
+  for i, value in ipairs(FFFruit) do
+    TraitFactory.addTrait("FavFood"..value, value, 0, "This increases positive buffs your character gets from eating "..value, false);
+  end
+  for i, value in ipairs(FFVeggies) do
+    TraitFactory.addTrait("FavFood"..value, value, 0, "This increases positive buffs your character gets from eating "..value, false);
+  end
+  for i, value in ipairs(FFPerishableFood) do
+    TraitFactory.addTrait("FavFood"..value, value, 0, "This increases positive buffs your character gets from eating "..value, false);
+  end
 
-    --         local traitName = "FavFood"+listItem;
-    --         local traitTooltipText = "This increases positive buffs your character gets from eating "+listItem;
-    --         TraitFactory.addTrait(traitName, listItem, 0, traitTooltipText, false);
-    --     end
-    -- end
-   
-    local favFoodChicken = TraitFactory.addTrait("FavFoodChicken", "Chicken", 0, "This increases positive buffs your character gets from eating Chicken", false);
-    local favFoodBacon = TraitFactory.addTrait("FavFoodBacon", "Bacon", 0, "This increases positive buffs your character gets from eating Bacon", false);
-    local favFoodApple = TraitFactory.addTrait("FavFoodApple", "Apple", 0, "This increases positive buffs your character gets from eating Apples", false);
-    local favFoodBanana = TraitFactory.addTrait("FavFoodBanana", "Banana", 0, "This increases positive buffs your character gets from eating Bananas", false);
-    local favFoodAvocado = TraitFactory.addTrait("FavFoodAvocado", "Avocado", 0, "This increases positive buffs your character gets from eating Avocados", false);
-    local favFoodCheese = TraitFactory.addTrait("FavFoodCheese", "Cheese", 0, "This increases positive buffs your character gets from eating Cheese", false);
-
-    TraitFactory.sortList();
+  TraitFactory.sortList();
 
 end
 
